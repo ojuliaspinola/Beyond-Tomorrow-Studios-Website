@@ -3,7 +3,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
 // ---------- Reveal on scroll ----------
 const revealTargets = document.querySelectorAll(
-  ".section__head, .who__lead, .service, .clients li, .feature__copy, .feature__art, .founder, .founders__note, .callout__grid, .merch__copy, .boxes"
+  ".section__head, .who__lead, .service, .clients li, .feature__copy, .feature__art, .founder, .founders__note, .callout__grid, .merch__copy, .boxes, .past-game"
 );
 revealTargets.forEach((el) => el.setAttribute("data-reveal", ""));
 
@@ -132,40 +132,37 @@ if ("IntersectionObserver" in window && sections.length) {
   });
 })();
 
-// ---------- Sparkle trail over Sleep Swimmer ----------
+// ---------- Sparkle trail (anywhere on the page) ----------
 (function () {
-  const host = document.getElementById("sleep-swimmer");
-  if (!host) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  // No mouse on touch-only devices; skip to save work
+  if (!window.matchMedia("(hover: hover)").matches) return;
 
   let lastX = -9999;
   let lastY = -9999;
 
-  host.addEventListener("mousemove", (e) => {
+  document.addEventListener("mousemove", (e) => {
     const dx = e.clientX - lastX;
     const dy = e.clientY - lastY;
-    if (dx * dx + dy * dy < 16 * 16) return; // throttle by distance
+    if (dx * dx + dy * dy < 16 * 16) return; // distance throttle
     lastX = e.clientX;
     lastY = e.clientY;
 
-    const rect = host.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
     const sparkle = document.createElement("span");
     sparkle.className = "sparkle";
-    sparkle.style.left = x + "px";
-    sparkle.style.top = y + "px";
+    // position: fixed in CSS, so use viewport coords directly
+    sparkle.style.left = e.clientX + "px";
+    sparkle.style.top = e.clientY + "px";
     const size = 8 + Math.random() * 10;
     sparkle.style.setProperty("--sparkle-size", size + "px");
-    host.appendChild(sparkle);
+    document.body.appendChild(sparkle);
 
-    // Clean up after animation completes
     setTimeout(() => sparkle.remove(), 850);
   });
 
-  // Don't leak sparkles when leaving section
-  host.addEventListener("mouseleave", () => {
+  // Reset throttle reference if cursor leaves the window so the next
+  // re-entry sparkle isn't suppressed by stale coords.
+  document.addEventListener("mouseleave", () => {
     lastX = -9999;
     lastY = -9999;
   });

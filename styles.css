@@ -419,6 +419,65 @@ button { font: inherit; }
   font-size: 16px;
   line-height: 1.6;
 }
+.press-quote {
+  margin: 24px 0 0;
+  padding: 18px 22px;
+  border-left: 2px solid #3a3a3a;
+  background: rgba(243, 241, 236, 0.04);
+  border-radius: 4px;
+  max-width: 52ch;
+}
+.press-quote blockquote {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: clamp(15px, 1.4vw, 18px);
+  font-style: italic;
+  color: #efece5;
+  line-height: 1.5;
+}
+.press-quote figcaption {
+  margin-top: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--on-dark-muted);
+}
+.press-quote cite { font-style: normal; }
+
+.awards {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: #2a2a2a;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 560px;
+}
+.awards li {
+  background: var(--dark);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.awards li span {
+  font-size: 13px;
+  color: #ececec;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+.awards li em {
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--on-dark-muted);
+}
+
 .feature__pills {
   margin-top: 24px;
   display: flex;
@@ -659,9 +718,9 @@ button { font: inherit; }
 :root[data-theme="dark"] .theme-toggle__icon--sun { display: none; }
 :root[data-theme="dark"] .theme-toggle__icon--moon { display: block; }
 
-/* Sparkle trail (Sleep Swimmer) */
+/* Sparkle trail — follows the cursor anywhere on the page */
 .sparkle {
-  position: absolute;
+  position: fixed;
   pointer-events: none;
   width: var(--sparkle-size, 12px);
   height: var(--sparkle-size, 12px);
@@ -670,10 +729,13 @@ button { font: inherit; }
     50% 0%, 53% 47%, 100% 50%, 53% 53%,
     50% 100%, 47% 53%, 0% 50%, 47% 47%
   );
-  filter: drop-shadow(0 0 6px rgba(180, 215, 255, 0.7));
+  /* Light blue glow for visibility on dark bg + dark outline for visibility on light bg */
+  filter:
+    drop-shadow(0 0 6px rgba(180, 215, 255, 0.85))
+    drop-shadow(0 0 3px rgba(20, 20, 40, 0.35));
   animation: sparkle-fade 800ms ease-out forwards;
   will-change: transform, opacity;
-  z-index: 1;
+  z-index: 9999;
 }
 @keyframes sparkle-fade {
   0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.2) rotate(0deg); }
@@ -695,6 +757,38 @@ button { font: inherit; }
   padding-top: 14px;
 }
 .feature__readout span:nth-child(even) { color: var(--on-dark); }
+
+/* ---------- Past games ---------- */
+.past-games {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 2.5vw, 32px);
+}
+.past-game {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  background: var(--bg-elev);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.past-game header h3 {
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+.past-game header span {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.past-game p { color: var(--ink-2); }
 
 /* ---------- Founders ---------- */
 .founders {
@@ -858,6 +952,7 @@ button { font: inherit; }
   .gallery { aspect-ratio: 16 / 10; }
 
   .founders { grid-template-columns: 1fr; }
+  .past-games { grid-template-columns: 1fr; }
   .footer__grid { grid-template-columns: 1fr; }
   .footer__meta { text-align: left; }
 }
