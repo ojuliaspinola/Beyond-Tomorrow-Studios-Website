@@ -854,7 +854,17 @@ button { font: inherit; }
   margin-top: 14px;
   text-transform: uppercase;
 }
-.callout__body { margin: 18px 0 24px; max-width: 52ch; color: var(--ink-2); }
+.callout__lede {
+  margin: 14px 0 0;
+  font-size: clamp(16px, 1.5vw, 20px);
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+.callout__body { margin: 18px 0 0; max-width: 52ch; color: var(--ink-2); }
+.callout__body + .callout__body { margin-top: 14px; }
+.callout__body + .btn,
+.callout__body + .btn--solid { margin-top: 24px; }
+.callout__grid .btn { margin-top: 24px; }
 .callout__facts {
   margin: 0;
   display: grid;
