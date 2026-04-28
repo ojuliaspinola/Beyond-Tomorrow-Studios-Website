@@ -15,6 +15,19 @@
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+    <script>
+      // Set theme before first paint to avoid FOUC.
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          document.documentElement.setAttribute(
+            "data-theme",
+            stored || (prefersDark ? "dark" : "light")
+          );
+        } catch (e) {}
+      })();
+    </script>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -43,7 +56,7 @@
         <div class="grid">
           <div class="hero__meta">
             <span class="tag">[ 001 / Studio ]</span>
-            <span class="tag">Est. 2022 — London / Remote</span>
+            <span class="tag">Est. 2022 — London</span>
           </div>
 
           <h1 class="hero__title">
@@ -242,28 +255,61 @@
             </div>
           </div>
           <div class="feature__art">
-            <div class="feature__screens">
-              <div class="screen screen--a">
-                <img
-                  src="assets/ss_416eae6161d9a16aada01a47bbdca8550a9081ba.1920x1080.jpg"
-                  alt="Sleep Swimmer — gameplay screenshot of Aria's underwater dream world"
-                  loading="lazy"
-                />
+            <div class="gallery" data-gallery>
+              <div class="gallery__track" data-gallery-track tabindex="0" aria-label="Sleep Swimmer screenshots">
+                <figure class="gallery__slide">
+                  <img
+                    src="assets/ss_416eae6161d9a16aada01a47bbdca8550a9081ba.1920x1080.jpg"
+                    alt="Sleep Swimmer — gameplay screenshot of Aria's underwater dream world"
+                    loading="lazy"
+                  />
+                </figure>
+                <figure class="gallery__slide">
+                  <img
+                    src="assets/ss_dddaffb6f7e489989bfb98dad682a0403f8034b2.1920x1080.jpg"
+                    alt="Sleep Swimmer — gameplay screenshot"
+                    loading="lazy"
+                  />
+                </figure>
+                <figure class="gallery__slide">
+                  <img
+                    src="assets/ss_ecaa4f1ba043f8b9d30d87bd93a40afa6872a09e.1920x1080.jpg"
+                    alt="Sleep Swimmer — gameplay screenshot"
+                    loading="lazy"
+                  />
+                </figure>
+                <figure class="gallery__slide">
+                  <img
+                    src="assets/ss_04493b635e592af3721cb2ded61e53f37f089adc.1920x1080.jpg"
+                    alt="Sleep Swimmer — gameplay screenshot"
+                    loading="lazy"
+                  />
+                </figure>
+                <figure class="gallery__slide">
+                  <img
+                    src="assets/ss_f50beb810d4c1bc8bedf305b37dec2b677dd5bc6.1920x1080.jpg"
+                    alt="Sleep Swimmer — gameplay screenshot"
+                    loading="lazy"
+                  />
+                </figure>
               </div>
-              <div class="screen screen--b">
-                <img
-                  src="assets/ss_dddaffb6f7e489989bfb98dad682a0403f8034b2.1920x1080.jpg"
-                  alt="Sleep Swimmer — gameplay screenshot"
-                  loading="lazy"
-                />
-              </div>
-              <div class="screen screen--c">
-                <img
-                  src="assets/ss_ecaa4f1ba043f8b9d30d87bd93a40afa6872a09e.1920x1080.jpg"
-                  alt="Sleep Swimmer — gameplay screenshot"
-                  loading="lazy"
-                />
-              </div>
+              <button
+                class="gallery__btn gallery__btn--prev"
+                type="button"
+                aria-label="Previous screenshot"
+                data-gallery-prev
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button
+                class="gallery__btn gallery__btn--next"
+                type="button"
+                aria-label="Next screenshot"
+                data-gallery-next
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="gallery__dots" aria-hidden="true" data-gallery-dots></div>
             </div>
             <div class="feature__readout">
               <span>// developer</span>
@@ -274,6 +320,31 @@
               <span>Coming soon</span>
             </div>
           </div>
+        </div>
+
+        <!-- Blind box collectibles -->
+        <div class="merch" id="blind-boxes">
+          <div class="merch__copy">
+            <span class="tag tag--light">[ 04b · Collectibles — Coming soon ]</span>
+            <h3 class="merch__title">Sleep Swimmer<br />Blind Box Figures</h3>
+            <p class="merch__body">
+              A limited line of 3D-printed collectible figures based on the cast of Sleep Swimmer — sold blind-box
+              style, with rare chase variants tucked among the regulars. Drops alongside the game.
+            </p>
+            <ul class="merch__pills">
+              <li>3D-printed</li>
+              <li>Numbered run</li>
+              <li>Chase variants</li>
+            </ul>
+          </div>
+          <ul class="boxes" aria-hidden="true">
+            <li><span>?</span></li>
+            <li><span>?</span></li>
+            <li class="boxes__rare"><span>★</span></li>
+            <li><span>?</span></li>
+            <li><span>?</span></li>
+            <li><span>?</span></li>
+          </ul>
         </div>
       </section>
 
@@ -352,10 +423,26 @@
         </nav>
         <div class="footer__meta">
           <p>© <span id="year"></span> Beyond Tomorrow Studios Ltd.</p>
-          <p>London · Remote</p>
+          <p>London</p>
         </div>
       </div>
     </footer>
+
+    <button
+      class="theme-toggle"
+      type="button"
+      aria-label="Toggle dark mode"
+      aria-pressed="false"
+      data-theme-toggle
+    >
+      <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke-linecap="round" />
+      </svg>
+      <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" stroke-linejoin="round" />
+      </svg>
+    </button>
 
     <script src="script.js" defer></script>
   </body>
