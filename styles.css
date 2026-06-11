@@ -13,7 +13,7 @@
   --on-dark: #f3f1ec;
   --on-dark-muted: #8b887f;
 
-  /* Warm accent — used sparingly for cozy/character moments */
+  /* Warm accent: used sparingly for cozy/character moments */
   --warm: #d4a574;
   --warm-soft: #f5e6d4;
   --warm-deep: #8a5a2b;
@@ -792,7 +792,7 @@ button { font: inherit; }
 :root[data-theme="dark"] .theme-toggle__icon--sun { display: none; }
 :root[data-theme="dark"] .theme-toggle__icon--moon { display: block; }
 
-/* Sparkle trail — follows the cursor anywhere on the page */
+/* Sparkle trail: follows the cursor anywhere on the page */
 .sparkle {
   position: fixed;
   pointer-events: none;
@@ -902,6 +902,13 @@ button { font: inherit; }
   align-self: start;
 }
 .founders__note p { color: var(--ink-2); }
+.founders__link {
+  font-weight: 600;
+  border-bottom: 1px solid currentColor;
+  transition: color 180ms ease;
+}
+.founders__link:hover { color: var(--warm-deep); }
+:root[data-theme="dark"] .founders__link:hover { color: var(--warm); }
 
 /* ---------- Callout ---------- */
 .callout {
