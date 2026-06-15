@@ -186,7 +186,6 @@ button { font: inherit; }
 .hero {
   border-bottom: 1px solid var(--line);
   padding: clamp(48px, 10vw, 112px) var(--pad) clamp(56px, 10vw, 120px);
-  background: var(--bg);
 }
 .grid { max-width: var(--max); margin: 0 auto; }
 
@@ -216,35 +215,27 @@ button { font: inherit; }
 }
 @keyframes blink { 50% { opacity: 0; } }
 
-.hero__lede {
+.hero__panel {
   margin-top: 36px;
+  background: var(--bg);
+  padding: clamp(22px, 3vw, 36px) clamp(26px, 3.5vw, 40px);
+  border-radius: var(--radius);
+  width: fit-content;
+  max-width: 100%;
+}
+.hero__lede {
+  margin: 0;
   max-width: 640px;
   font-size: clamp(16px, 1.6vw, 20px);
   color: var(--ink-2);
 }
 
 .hero__cta {
-  margin-top: 28px;
+  margin-top: 24px;
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
 }
-
-.hero__side {
-  margin-top: 40px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  border-top: 1px solid var(--line);
-  padding-top: 18px;
-}
-.hero__spec {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.spec__k { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.spec__v { font-size: 15px; color: var(--ink); }
 
 /* ---------- Section header ---------- */
 .section {
@@ -1103,7 +1094,6 @@ button { font: inherit; }
 
 @media (max-width: 640px) {
   .nav__links { display: none; }
-  .hero__side { grid-template-columns: 1fr; }
   .services { grid-template-columns: 1fr; }
   .services .service { border-right: none !important; border-bottom: 1px solid var(--line) !important; }
   .services .service:last-child { border-bottom: none !important; }
