@@ -119,6 +119,12 @@ button { font: inherit; }
 .btn--solid { background: var(--ink); color: var(--on-dark); }
 .btn--solid:hover { background: transparent; color: var(--ink); }
 
+/* Dark mode: --ink flips to light, so buttons need their foreground re-paired with --bg (now dark) for legibility */
+:root[data-theme="dark"] .btn--solid { color: var(--bg); }
+:root[data-theme="dark"] .btn--solid:hover { background: transparent; color: var(--ink); }
+:root[data-theme="dark"] .btn:hover { background: var(--ink); color: var(--bg); }
+:root[data-theme="dark"] .btn--ghost:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
 /* ---------- Nav ---------- */
 .nav {
   position: sticky;
