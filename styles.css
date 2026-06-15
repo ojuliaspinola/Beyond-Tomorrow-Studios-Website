@@ -379,6 +379,18 @@ button { font: inherit; }
 :root[data-theme="dark"] .service__eg em { color: var(--ink); }
 
 /* ---------- Clients ---------- */
+/* "Worked With" stays cream / light-themed even in dark mode so the logos read */
+#work {
+  --bg: #f3f1ec;
+  --bg-elev: #ecebe4;
+  --ink: #0c0c0c;
+  --ink-2: #2a2a2a;
+  --muted: #7a7871;
+  --line: #d6d3c9;
+  --line-2: #c5c1b4;
+  background: #f3f1ec;
+}
+
 .clients {
   max-width: var(--max);
   margin: 0 auto;
@@ -391,16 +403,39 @@ button { font: inherit; }
 }
 .clients li {
   flex: 1 1 180px;
-  padding: 26px 18px;
+  min-height: 92px;
+  padding: 22px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--line);
+}
+.clients li:last-child { border-right: none; }
+.clients li img {
+  max-height: 40px;
+  max-width: 130px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.75;
+  transition: filter 220ms ease, opacity 220ms ease, transform 220ms ease;
+}
+.clients li:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.04);
+}
+.clients__text {
   font-family: var(--mono);
   font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink);
-  border-right: 1px solid var(--line);
-  text-align: center;
+  opacity: 0.75;
+  transition: opacity 220ms ease;
 }
-.clients li:last-child { border-right: none; }
+.clients li:hover .clients__text { opacity: 1; }
 
 /* ---------- Feature (Sleep Swimmer) ---------- */
 .feature {
