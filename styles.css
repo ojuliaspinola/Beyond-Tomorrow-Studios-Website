@@ -180,6 +180,7 @@ button { font: inherit; }
 .hero {
   border-bottom: 1px solid var(--line);
   padding: clamp(48px, 10vw, 112px) var(--pad) clamp(56px, 10vw, 120px);
+  background: var(--bg);
 }
 .grid { max-width: var(--max); margin: 0 auto; }
 
